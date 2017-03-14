@@ -1,10 +1,11 @@
-# Tietokantasovelluksen esittelysivu
+# Reseptitietokanta
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Sovellus](http://tpudas.users.cs.helsinki.fi/reseptit)
+* [Dokumentaatio](https://www.github.com)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Reseptitietokanta on web-sovellus, jossa rekisteröityneet käyttäjät voivat jakaa ruokareseptejä keskenään. Sovelluksella voi myös hakea reseptejä raaka-aineiden tai reseptiin liitettyjen tägien avulla.
+
