@@ -7,5 +7,5 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Reseptitietokanta on web-sovellus, jonka käyttäjät voivat jakaa ruokareseptejä keskenään. Sovelluksella voi myös hakea reseptejä raaka-aineiden tai reseptiin liitettyjen tägien avulla.
+Reseptitietokanta on web-sovellus, jonka avulla käyttäjät voivat jakaa ruokareseptejä muiden kanssa. Tunnuksen luominen ja kirjautuminen ovat edellytyksenä uusien reseptien luomiselle järjestelmään. Reseptejä voi kuitenkin lukea ilman kirjautumistakin. Reseptejä voi etsiä myös raaka-aineiden tai reseptiin mahdollisesti liitettyjen tägien avulla.
 
