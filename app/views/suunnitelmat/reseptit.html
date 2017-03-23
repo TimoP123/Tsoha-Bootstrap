@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<h1>Reseptit</h1>
+	
+	<!-- Reseptilista -->
+	<ul>
+		<li><a href="#">Keitetyt perunat</a></li>
+		<li><a href="#">Munakoisopaistos</a></li>
+		<li><a href="#">Chilimiehen tortillat</a></li>
+		<li><a href="#">Hampurilainen</a></li>
+		<li><a href="#">Pannukakku</a></li>
+	</ul>
+	
+	<!-- nappula reseptien lisäämiseen. Tulee näkymään vain kirjautuneille käyttäjille -->
+	<div class="form-group">
+		<button class="btn btn-success">Lis&auml;&auml; resepti</button>
+	</div>
+
+{% endblock %}
