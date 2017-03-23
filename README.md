@@ -11,8 +11,8 @@ Reseptitietokanta on web-sovellus, jonka avulla käyttäjät voivat jakaa ruokar
 
 
 ### Suunnitelmia sovelluksen sivuista
-[Etusivu](http://tpudas.users.cs.helsinki.fi/reseptit/etusivu)
-[Kirjautumissivu](http://tpudas.users.cs.helsinki.fi/reseptit/login)
-[Reseptilistaus](http://tpudas.users.cs.helsinki.fi/reseptit/reseptit)
-[Esimerkki reseptisivusta](http://tpudas.users.cs.helsinki.fi/reseptit/reseptiesimerkki)
-[Reseptin muokkaussivu](http://tpudas.users.cs.helsinki.fi/reseptit/muokkaa)
+* [Etusivu](http://tpudas.users.cs.helsinki.fi/reseptit/etusivu)
+* [Kirjautumissivu](http://tpudas.users.cs.helsinki.fi/reseptit/login)
+* [Reseptilistaus](http://tpudas.users.cs.helsinki.fi/reseptit/reseptit)
+* [Esimerkki reseptisivusta](http://tpudas.users.cs.helsinki.fi/reseptit/reseptiesimerkki)
+* [Reseptin muokkaussivu](http://tpudas.users.cs.helsinki.fi/reseptit/muokkaa)
