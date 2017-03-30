@@ -3,10 +3,29 @@
   $routes->get('/', function() {
     HelloWorldController::index();
   });
+  
+  $routes->get('/resepti', function() {
+    ReseptiController::index();
+  });
+  
+  $routes->post('/resepti', function(){
+    ReseptiController::store();
+  });
+  
+  $routes->get('/resepti/new', function() {
+    ReseptiController::create();
+  });
+  
+  $routes->get('/resepti/:id', function($id){
+	ReseptiController::show($id);
+  });
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
+  
+  
+  // Suunnitelmasivut
   
   $routes->get('/login', function() {
     HelloWorldController::login();

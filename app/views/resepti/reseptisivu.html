@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if message %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endif %}
+	
+
+	<h1>{{resepti.nimi}}</h1>
+	
+	<p>Reseptin jakoi: {{resepti.tekija}}</p>
+	
+	{% if resepti.aineet %}
+
+	<h3>Valmistusaineet</h3>
+	
+		<table class="table table-striped table-bordered">
+			<thead>
+			  <tr>
+				<th>Raaka-aine</th>
+				<th>määrä</th>
+			  </tr>
+			</thead>
+			
+			<tbody>
+			  {% for aine in resepti.aineet %}
+				<tr>
+				  <td>{{aine.nimi}}</td>
+				  <td>{{aine.maara}}</td>
+				</tr>
+			  {% endfor %}
+			</tbody>
+			
+		</table>
+		
+	{% else %}
+	
+		<p class="alert alert-danger">Sovelluksen nykyinen versio ei tue vielä raaka-aineiden tallennusta käyttöliittymän kautta. Asia korjataan piakkoin.</p>
+
+	{% endif %}
+	
+	<h3>Tee näin</h3>
+	
+	<p>{{resepti.ohje}}</p>
+
+
+{% endblock %}

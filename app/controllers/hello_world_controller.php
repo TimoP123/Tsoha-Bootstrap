@@ -30,6 +30,31 @@
     public static function sandbox(){
       // Testaa koodiasi täällä
       //echo 'Hello World!';
-	  View::make('helloworld.html');
+	  //View::make('helloworld.html');
+	  
+	  $perunat = Resepti::find(1);
+	  $reseptit = Resepti::all();
+	  
+	  Kint::dump($reseptit);
+	  Kint::dump($perunat);
+	  
+	  $aine = Aine::find(2);
+	  $aineet = Aine::all();
+	  
+	  Kint::dump($aineet);
+	  Kint::dump($aine);
+	  
+	  $tag = Tag::find(2);
+	  $tagit = Tag::all();
+	  
+	  Kint::dump($tagit);
+	  Kint::dump($tag);
+	  
+	  $kayttaja = Kayttaja::find(2);
+	  $kayttajat = Kayttaja::all();
+	  
+	  Kint::dump($kayttajat);
+	  Kint::dump($kayttaja);
+
     }
   }
