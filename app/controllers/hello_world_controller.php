@@ -32,6 +32,7 @@
       //echo 'Hello World!';
 	  //View::make('helloworld.html');
 	  
+	  /*
 	  $perunat = Resepti::find(1);
 	  $reseptit = Resepti::all();
 	  
@@ -55,6 +56,17 @@
 	  
 	  Kint::dump($kayttajat);
 	  Kint::dump($kayttaja);
+	  */
+
+	$resepti = new Resepti(array(
+		'id' => 3,
+		'tekijaId' => 2,
+		'nimi' => 'Ri',
+		'ohje' => 'Boooom!'
+	));
+	$errors = $resepti->errors();
+
+	Kint::dump($errors);
 
     }
   }

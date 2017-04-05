@@ -20,7 +20,21 @@
       $errors = array();
 
       foreach($this->validators as $validator){
-        // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $validator_errors = $this->{$validator}();
+        $errors = array_merge($errors, $validator_errors);
+      }
+
+      return $errors;
+    }
+
+
+    public function validate_string_length($string, $length, $type){
+      $errors = array();
+      if($string == '' || $string == null){
+        $errors[] = $type.' ei saa olla tyhjä!';
+      }
+      if(strlen($string) < $length){
+        $errors[] = $type.'-merkkijonon pituuden tulee olla vähintään '.$length.' merkkiä!';
       }
 
       return $errors;

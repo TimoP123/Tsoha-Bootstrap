@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää uusi resepti</h1>
+  <h1>Muokkaa reseptiä</h1>
 
   {% if errors %}
     <div class="alert alert-danger">
@@ -12,7 +12,7 @@
     </div>
   {% endif %}
 
-  <form method="post" action="{{base_path}}/resepti">
+  <form method="post" action="{{base_path}}/resepti/{{attributes.id}}/edit">
     <div class="form-group">
       <label>Nimi</label>
       <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Lisää</button>
+      <button type="submit" class="btn btn-primary">Muokkaa</button>
     </div>
   </form>
 {% endblock %}

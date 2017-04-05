@@ -45,5 +45,11 @@
 	
 	<p>{{resepti.ohje}}</p>
 
+	<a href="http://tpudas.users.cs.helsinki.fi/reseptit/resepti" class="btn btn-primary">Selaa reseptejä</a>
+	
+	<form method="post" action="{{base_path}}/resepti/{{resepti.id}}/destroy" style="display: inline-block;">
+		<button type="submit" class="btn btn-danger">Poista resepti</button>
+	</form>
+
 
 {% endblock %}

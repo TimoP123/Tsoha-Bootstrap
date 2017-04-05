@@ -1,6 +1,9 @@
 <?php
 
 class Resepti extends BaseModel {
+
+	const NIMEN_MINIMIPITUUS = 3;
+	const OHJEEN_MINIMIPITUUS = 10;
 	
 	public $id, $tekijaId, $nimi, $ohje, $aineet, $tekija;
 	
@@ -9,6 +12,7 @@ class Resepti extends BaseModel {
 		parent::__construct($attributes);
 		$this->tekija = Kayttaja::find($this->tekijaId)->nimi;
 		$this->aineet = $this->haeAineet();
+		$this->validators = array('validate_nimi', 'validate_ohje');
 	}
 	
 	
@@ -80,7 +84,32 @@ class Resepti extends BaseModel {
 		$this->id = $row['id'];
 	}
 	
+
+	public function update() {
+        $query = DB::connection()->prepare('UPDATE resepti SET nimi = :nimi, ohje = :ohje WHERE id = :id');
+        $query->execute(array(
+            'nimi' => $this->nimi,
+            'ohje' => $this->ohje,
+            'id' => $this->id
+        ));
+    }
+
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM resepti WHERE id = :id');
+        $query->execute(array(
+            'id' => $this->id
+        ));
+    }
+
 	
+	public function validate_nimi(){
+		return parent::validate_string_length($this->nimi, self::NIMEN_MINIMIPITUUS, 'Nimi');
+	}
+
+	public function validate_ohje(){
+		return parent::validate_string_length($this->ohje, self::OHJEEN_MINIMIPITUUS, 'Ohje');
+	}
 	
 }
 	

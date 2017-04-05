@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+
+	{% if message %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endif %}
+  
   <h1>Reseptit</h1>
 
   <p>
@@ -20,7 +27,7 @@
         <tr>
           <td><a href="{{base_path}}/resepti/{{resepti.id}}">{{resepti.nimi}}</td>
 		  <td>{{resepti.tekija}}</td>
-          <td><a class="btn btn-default btn-sm" href="#" onClick="alert('Muokkaustoiminto ei ole vielä käytössä');">Muokkaa</a></td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.id}}/edit">Muokkaa</a></td>
         </tr>
       {% endfor %}
     </tbody>

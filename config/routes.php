@@ -17,7 +17,19 @@
   });
   
   $routes->get('/resepti/:id', function($id){
-	ReseptiController::show($id);
+	  ReseptiController::show($id);
+  });
+
+  $routes->get('/resepti/:id/edit', function($id){
+    ReseptiController::edit($id);
+  });
+
+  $routes->post('/resepti/:id/edit', function($id){
+    ReseptiController::update($id);
+  });
+
+  $routes->post('/resepti/:id/destroy', function($id){
+    ReseptiController::destroy($id);
   });
 
   $routes->get('/hiekkalaatikko', function() {
