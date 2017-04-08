@@ -43,6 +43,25 @@ class Kayttaja extends BaseModel {
 		
 		return null;
 	}
+
+
+	public static function authenticate($email, $salasana) {
+		$query = DB::connection()->prepare('SELECT * FROM kayttaja WHERE email = :email AND salasana = :salasana LIMIT 1');
+		$query->execute(array('email' => $email, 'salasana' => $salasana));
+		$row = $query->fetch();
+		if($row){
+			$kayttaja = new Kayttaja(array(
+				'id' => $row['id'],
+				'nimi' => $row['nimi'],
+				'email' => $row['email']
+			));
+
+			return $kayttaja;
+		} else {
+			// Kayttajaa ei loytynyt
+			return null;
+		}
+	}
 	
 }
 	

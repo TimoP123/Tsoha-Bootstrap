@@ -41,9 +41,18 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Etusivu</a></li>
-			<li><a href="{{base_path}}/resepti">Reseptit</a></li>
+			      <li><a href="{{base_path}}/resepti">Reseptit</a></li>
           </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if user_logged_in %}
+              <li><a href="{{base_path}}/logout"><button class="btn btn-default btn-sm">Kirjaudu ulos</button></a></li>
+              
+            {% else %}
+              <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
+            {% endif %}
+          </ul>
+
         </div>
       </div>
     </nav>

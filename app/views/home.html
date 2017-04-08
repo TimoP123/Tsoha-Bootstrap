@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+  {% if message %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endif %}
+
+  {% if user_logged_in %}
+    <p>Olet kirjautunut sisään nimellä {{user_logged_in.nimi}}</p>
+  {% endif %}
+
   <div class="page-header">
     <h1>Tervetuloa Reseptitietokantaan!</h1>
     <p><b>Sukella herkullisten reseptien pariin ja jaa omat salaiset ohjeesi.</b></p>

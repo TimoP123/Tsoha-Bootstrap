@@ -7,29 +7,46 @@
 		</div>
 	{% endif %}
   
-  <h1>Reseptit</h1>
+	{% import "macros/forms.html" as forms %}
+  
+	{% if user_logged_in %}
+    <p>Olet kirjautunut sisään nimellä {{user_logged_in.nimi}}</p>
+  {% endif %}
 
-  <p>
-    <a href="{{base_path}}/resepti/new" class="btn btn-success">Lisää resepti</a>
-  </p>
+	<h1>Reseptit</h1>
 
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Tekijä</th>
-		<th></th>
-      </tr>
-    </thead>
+	{% if user_logged_in %}
+    <p>
+			<a href="{{base_path}}/resepti/new" class="btn btn-success">Lisää resepti</a>
+		</p>
+	{% else %}
+		<p><a href="{{base_path}}/login">Kirjaudu sisään</a> voidaksesi lisätä reseptejä.</p>
+  {% endif %}
+	
 
-    <tbody>
-      {% for resepti in reseptit %}
-        <tr>
-          <td><a href="{{base_path}}/resepti/{{resepti.id}}">{{resepti.nimi}}</td>
+	<table class="table table-striped table-bordered">
+	<thead>
+	  <tr>
+		<th>Nimi</th>
+		<th>Tekijä</th>
+		{% if user_logged_in %}
+			<th></th>
+			<th></th>
+		{% endif %}
+	  </tr>
+	</thead>
+
+	<tbody>
+	  {% for resepti in reseptit %}
+		<tr>
+		  <td><a href="{{base_path}}/resepti/{{resepti.id}}">{{resepti.nimi}}</td>
 		  <td>{{resepti.tekija}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/resepti/{{resepti.id}}/edit">Muokkaa</a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+			{% if user_logged_in %}
+				<td>{{forms.edit_button("#{base_path}/resepti/#{resepti.id}/edit")}}</td>
+				<td>{{forms.destroy_button("#{base_path}/resepti/#{resepti.id}/destroy", "Poista resepti")}}</td>
+			{% endif %}
+		</tr>
+	  {% endfor %}
+	</tbody>
+	</table>
 {% endblock %}
