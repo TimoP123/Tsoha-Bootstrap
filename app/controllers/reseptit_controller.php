@@ -76,6 +76,11 @@ class ReseptiController extends BaseController {
 
 
 	public static function destroy($id){
+		// Tilapäinen koodi, poistetaan myöhemmin
+		if($id == 1) {
+			Redirect::to('/resepti', array('message' => 'Resepti, jonka yritit poistaa, on niin ainutlaatuinen, että annetaanpa sen olla.'));
+		}
+
 		$resepti = Resepti::find($id);
 		$resepti->destroy();
 
