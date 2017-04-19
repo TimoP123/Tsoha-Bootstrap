@@ -16,6 +16,14 @@
 	<h1>{{resepti.nimi}}</h1>
 	
 	<p>Reseptin jakoi: {{resepti.tekija}}</p>
+
+	{% if resepti.tagit %}
+		<p>Tagit: 
+			{% for tag in resepti.tagit %}
+				<i>{{tag.nimi}} </i>
+			{% endfor %}
+			</p>
+	{% endif %}
 	
 	{% if resepti.aineet %}
 

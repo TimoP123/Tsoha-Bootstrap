@@ -41,7 +41,9 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
+				  <li><a href="{{base_path}}">Etusivu</a></li>
 			      <li><a href="{{base_path}}/resepti">Reseptit</a></li>
+				  <li><a href="{{base_path}}/resepti/search">Haku</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -65,6 +67,8 @@
     {% block body %}
       <!-- jQuery -->
       <script src="{{base_path}}/vendor/jquery.min.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
       <!-- Bootstrap (skriptitiedosto) -->
       <script src="{{base_path}}/vendor/bootstrap/js/bootstrap.min.js"></script>

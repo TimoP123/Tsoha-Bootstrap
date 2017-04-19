@@ -28,6 +28,26 @@
     ReseptiController::create();
   });
   
+  $routes->get('/resepti/search', function() {
+    ReseptiController::search();
+  });
+  
+  $routes->post('/resepti/search', function() {
+    ReseptiController::handle_search();
+  });
+  
+  $routes->get('/nimet', function() {
+	  ReseptiController::listJSON();
+  });
+  
+  $routes->get('/tagit', function() {
+	  TagController::listJSON();
+  });
+  
+  $routes->get('/aineet', function() {
+	  AineController::listJSON();
+  });
+  
   $routes->get('/resepti/:id', function($id){
 	  ReseptiController::show($id);
   });

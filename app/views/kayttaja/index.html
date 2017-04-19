@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if message %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endif %}
+	
+	{% import "macros/forms.html" as forms %}
+	
+	{% if user_logged_in %}
+		<p>Olet kirjautunut sis‰‰n nimell‰ {{user_logged_in.nimi}}</p>
+	{% endif %}
+
+
+
+{% endblock %}

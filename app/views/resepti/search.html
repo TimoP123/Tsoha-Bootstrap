@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if error %}
+		<div class="alert alert-danger">
+		  {{error}}
+		</div>
+	{% endif %}
+
+	<h1>Reseptien haku</h1>
+	
+	<form method="post" action="{{base_path}}/resepti/search">
+	
+		<div id="hakutapavalinta" class="ui-widget">
+			<label class="radio-inline"><input type="radio" name="hakutapa" value="nimi" id="nimihaku">Nimihaku</label>
+			<label class="radio-inline"><input type="radio" name="hakutapa" value="aine" id="ainehaku">Raaka-ainehaku</label>
+			<label class="radio-inline"><input type="radio" name="hakutapa" value="tag" id="tagihaku">Tägihaku</label>
+		</div>
+		
+		<div id="hakukentta">
+			<input id="hakusana" name="hakusana">
+		</div>
+	
+		<button type="submit" class="btn btn-default">Etsi</button>
+	</form>
+
+{% endblock %}
