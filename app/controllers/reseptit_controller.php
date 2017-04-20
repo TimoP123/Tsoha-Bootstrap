@@ -170,7 +170,7 @@ class ReseptiController extends BaseController {
 	
 	
 	public static function listJSON() {
-		$nimet = Resepti::JsonTaulukko();
+		$nimet = Resepti::nimiTaulukko();
 		header("content-type: application/json");
 		echo json_encode($nimet);
 	}

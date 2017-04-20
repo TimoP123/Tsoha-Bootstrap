@@ -15,5 +15,15 @@
 		Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
 	  }
     }
+	
+	public static function is_admin() {
+		if(isset($_SESSION['kayttaja'])) {
+			$kayttaja = Kayttaja::find($_SESSION['kayttaja']);
+			if($kayttaja->taso == 2) {
+				return true;
+			}
+		}
+		return false;
+	}
 
   }

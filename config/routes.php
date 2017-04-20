@@ -36,6 +36,14 @@
     ReseptiController::handle_search();
   });
   
+  $routes->get('/kayttaja', function() {
+    UserController::index();
+  });
+  
+  $routes->get('/kayttaja/new', function() {
+    UserController::create();
+  });
+  
   $routes->get('/nimet', function() {
 	  ReseptiController::listJSON();
   });
@@ -62,6 +70,10 @@
 
   $routes->post('/resepti/:id/destroy', function($id){
     ReseptiController::destroy($id);
+  });
+  
+  $routes->get('/kayttaja/:id', function($id){
+	  UserController::show($id);
   });
 
   $routes->get('/hiekkalaatikko', function() {

@@ -64,7 +64,7 @@ class Aine extends BaseModel {
 	}
 	
 	
-	public static function JsonTaulukko() {
+	public static function nimiTaulukko() {
 		$aineet = self::all();
 		$array = array();
 		

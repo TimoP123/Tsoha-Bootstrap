@@ -3,7 +3,7 @@
 class AineController extends BaseController {
 
 	public static function listJSON() {
-		$aineet = Aine::JsonTaulukko();
+		$aineet = Aine::nimiTaulukko();
 		header("content-type: application/json");
 		echo json_encode($aineet);
 	}

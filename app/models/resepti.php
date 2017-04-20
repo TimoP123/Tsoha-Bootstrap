@@ -158,7 +158,7 @@ class Resepti extends BaseModel {
 	}
 	
 	
-	public static function JsonTaulukko() {
+	public static function nimiTaulukko() {
 		$reseptit = self::all();
 		$array = array();
 		
@@ -241,7 +241,10 @@ class Resepti extends BaseModel {
         ));
 
 		// Tuhotaan myös reseptiin liittyvät reseptiaine-rivit.
-		// TO-DO
+		$query = DB::connection()->prepare('DELETE FROM reseptiaine WHERE reseptiid = :id');
+		$query->execute(array(
+            'id' => $this->id
+        ));
 
 		// Lopuksi voidaan poistaa myös reseptin tietue resepti-taulusta.
         $query = DB::connection()->prepare('DELETE FROM resepti WHERE id = :id');

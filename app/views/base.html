@@ -44,6 +44,9 @@
 				  <li><a href="{{base_path}}">Etusivu</a></li>
 			      <li><a href="{{base_path}}/resepti">Reseptit</a></li>
 				  <li><a href="{{base_path}}/resepti/search">Haku</a></li>
+				  {% if user_logged_in %}
+					<li><a href="{{base_path}}/kayttaja">Käyttäjät</a></li>
+				  {% endif %}
           </ul>
 
           <ul class="nav navbar-nav navbar-right">

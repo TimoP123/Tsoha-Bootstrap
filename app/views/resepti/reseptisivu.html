@@ -15,7 +15,7 @@
 
 	<h1>{{resepti.nimi}}</h1>
 	
-	<p>Reseptin jakoi: {{resepti.tekija}}</p>
+	<p>Reseptin jakoi: <a href="{{base_path}}/kayttaja/{{resepti.tekijaId}}">{{resepti.tekija}}</a></p>
 
 	{% if resepti.tagit %}
 		<p>Tagit: 

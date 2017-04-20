@@ -64,7 +64,7 @@ class Tag extends BaseModel {
 	}
 	
 	
-	public static function JsonTaulukko() {
+	public static function nimiTaulukko() {
 		$tagit = self::all();
 		$array = array();
 		

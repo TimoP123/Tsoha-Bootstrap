@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% if message %}
+		<div class="alert alert-success">
+			{{message}}
+		</div>
+	{% endif %}
+	
+	{% import "macros/forms.html" as forms %}
+	
+	{% if user_logged_in %}
+		<p>Olet kirjautunut sisään nimellä {{user_logged_in.nimi}}</p>
+	{% endif %}
+
+	<h1>{{kayttaja.nimi}}</h1>
+	
+	<p><b>Email: </b>{{kayttaja.email}}</p>
+	
+	<p><b>Käyttäjätaso: </b>
+		{% if kayttaja.taso == 2 %}
+			Admin
+		{% else %}
+			Peruskäyttäjä
+		{% endif %}
+	</p>
+	
+	<p><b>
+		{% if resepteja == 0 %}
+			Ei ole julkaissut vielä yhtään reseptiä.
+		{% elseif resepteja == 1 %}
+			Julkaissut yhden reseptin.
+		{% else %}
+			Julkaissut {{resepteja}} reseptiä.
+		{% endif %}
+	</b></p>
+	
+	
+	<a href="http://tpudas.users.cs.helsinki.fi/reseptit/kayttaja" class="btn btn-primary">Käyttäjälistaukseen</a>	
+	
+{% endblock %}

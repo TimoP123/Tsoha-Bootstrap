@@ -39,5 +39,15 @@
 
       return $errors;
     }
+	
+	
+	public function validate_string_max_length($string, $max_length, $type) {
+		$errors = array();
+		if(strlen($string) > $max_length){
+			$errors[] = $type.'-merkkijonon pituus saa olla korkeintaan '.$length.' merkkiä!';
+		}
 
+		return $errors;
+	}
+	
   }
