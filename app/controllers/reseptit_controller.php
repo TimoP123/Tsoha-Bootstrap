@@ -25,18 +25,27 @@ class ReseptiController extends BaseController {
 		
 		$params = $_POST;
 		$tagit = array();
+		$aineet = array();
+		$maarat = array();
+
 		if(isset($params['tagit'])) {
 			$tagit = $params['tagit'];
+		}
+
+		if(isset($params['aineet']) && isset($params['maarat'])) {
+			$aineet = $params['aineet'];
+			$maarat = $params['maarat'];
 		}
 
 		$attributes = array(
 			'nimi' => $params['nimi'],
 			'ohje' => $params['ohje'],
-			'tagit' => array()
+			'tagit' => array(),
+			'aineet' => array()
 		);
 		
 		$resepti = new Resepti(array(
-			'tekijaId' => 2,			// Oletusarvo, kunnes kayttajan id:n haku saadaan toimintaan.
+			'tekijaId' => self::get_user_logged_in()->getId(),
 			'nimi' => $params['nimi'],
 			'ohje' => $params['ohje']
 		));
@@ -53,7 +62,19 @@ class ReseptiController extends BaseController {
 			$errors = array_merge($errors, $tag->errors());
 		}
 
+		for($i = 0; $i < sizeof($aineet); $i++) {
+			if(strlen($aineet[$i]) == 0 || strlen($maarat[$i]) == 0) {
+				continue;
+			}
+			$aineId = Aine::checkAndSave($aineet[$i]);
+			$aine = Aine::find($aineId);
+			$aine->maara = $maarat[$i];
+			$attributes['aineet'][] = $aine;
+			$errors = array_merge($errors, $aine->errors());
+		}
+
 		$resepti->tagit = $attributes['tagit'];
+		$resepti->aineet = $attributes['aineet'];
 
 		if(count($errors) == 0) {
 			$resepti->save();
@@ -78,16 +99,25 @@ class ReseptiController extends BaseController {
 		
 		$params = $_POST;
 		$tagit = array();
+		$aineet = array();
+		$maarat = array();
+
 		if(isset($params['tagit'])) {
 			$tagit = $params['tagit'];
 		}
 
+		if(isset($params['aineet']) && isset($params['maarat'])) {
+			$aineet = $params['aineet'];
+			$maarat = $params['maarat'];
+		}
+
 		$attributes = array(
 			'id' => $id,
-			'tekijaId' => 2,			// Oletusarvo, kunnes kayttajan id:n haku saadaan toimintaan.
+			'tekijaId' => $params['tekijaId'],
 			'nimi' => $params['nimi'],
 			'ohje' => $params['ohje'],
-			'tagit' => array()
+			'tagit' => array(),
+			'aineet' => array()
 		);
 
 		$resepti = new Resepti($attributes);
@@ -104,7 +134,19 @@ class ReseptiController extends BaseController {
 			$errors = array_merge($errors, $tag->errors());
 		}
 
+		for($i = 0; $i < sizeof($aineet); $i++) {
+			if(strlen($aineet[$i]) == 0 || strlen($maarat[$i]) == 0) {
+				continue;
+			}
+			$aineId = Aine::checkAndSave($aineet[$i]);
+			$aine = Aine::find($aineId);
+			$aine->maara = $maarat[$i];
+			$attributes['aineet'][] = $aine;
+			$errors = array_merge($errors, $aine->errors());
+		}
+
 		$resepti->tagit = $attributes['tagit'];
+		$resepti->aineet = $attributes['aineet'];
 
 		if(count($errors) > 0){
 			View::make('resepti/edit.html', array('errors' => $errors, 'attributes' => $attributes));

@@ -18,6 +18,19 @@
       <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
     </div>
 
+    <div class="form-group" id="aineFields">
+      <label>Valmistusaineet</label>
+      <ul>
+        {% for aine in attributes.aineet %}
+          <li>{{aine.nimi}}, {{aine.maara}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    
+    <div class="add">
+      <button type="button" class="btn btn-default btn-sm" id="addAineField">Uusi valmistusaine</button>
+    </div>
+
     <div class="form-group">
       <label>Valmistusohje</label>
       <textarea name="ohje" class="form-control">{{attributes.ohje}}</textarea>
@@ -32,7 +45,11 @@
       </ul>
     </div>
 
-    <button type="button" class="btn btn-default btn-sm" id="addTagField">Uusi tagikenttä</button>
+    <div class="add">
+      <button type="button" class="btn btn-default btn-sm add" id="addTagField">Uusi tagikenttä</button>
+    </div>
+
+    <input type="hidden" name="tekijaId" value="{{attributes.tekijaId}}">
 
     <div class="form-group">
       <button type="submit" class="btn btn-default">Tallenna muutokset</button>

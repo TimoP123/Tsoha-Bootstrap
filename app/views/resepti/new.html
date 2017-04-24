@@ -18,6 +18,14 @@
       <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
     </div>
 
+    <div class="form-group" id="aineFields">
+      <label>Valmistusaineet</label>
+    </div>
+
+    <div class="add">
+      <button type="button" class="btn btn-default btn-sm" id="addAineField">Uusi valmistusaine</button>
+    </div>
+
     <div class="form-group">
       <label>Valmistusohje</label>
       <textarea name="ohje" class="form-control">{{attributes.ohje}}</textarea>
@@ -27,7 +35,9 @@
       <label>Tagit</label>
     </div>
 
-    <button type="button" class="btn btn-default btn-sm" id="addTagField">Uusi tagikenttä</button>
+    <div class="add">
+      <button type="button" class="btn btn-default btn-sm" id="addTagField">Uusi tag</button>
+    </div>
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Lisää</button>

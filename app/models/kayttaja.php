@@ -55,6 +55,9 @@ class Kayttaja extends BaseModel {
 		return null;
 	}
 	
+	public function getId() {
+		return $this->id;
+	}
 	
 	public function save() {
 		$query = DB::connection()->prepare('INSERT INTO kayttaja (nimi, email, salasana, taso) VALUES (:nimi, :email, :salasana, :taso) RETURNING id');

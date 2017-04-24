@@ -199,6 +199,26 @@ class Resepti extends BaseModel {
 				'tagid' => $tag->id
 			));
 		}
+
+		foreach($this->aineet as $aine) {
+			// Jos reseptiaine on jo olemassa, ei sitä laiteta uudestaan. Ehkäistään mahdollisuus laittaa sama tag monta kertaa.
+			$query = DB::connection()->prepare('SELECT * FROM reseptiaine WHERE reseptiid = :reseptiid AND aineid = :aineid');
+			$query->execute(array(
+				'reseptiid' => $this->id,
+				'aineid' => $aine->id
+			));
+			$row = $query->fetch();
+			if($row) {
+				continue;
+			}
+
+			$query = DB::connection()->prepare('INSERT INTO reseptiaine (reseptiid, aineid, maara) VALUES (:reseptiid, :aineid, :maara)');
+			$query->execute(array(
+				'reseptiid' => $this->id,
+				'aineid' => $aine->id,
+				'maara' => $aine->maara
+			));
+		}
 	}
 	
 
@@ -228,6 +248,26 @@ class Resepti extends BaseModel {
 			$query->execute(array(
 				'reseptiid' => $this->id,
 				'tagid' => $tag->id
+			));
+		}
+
+		foreach($this->aineet as $aine) {
+			// Jos reseptiaine on jo olemassa, ei sitä laiteta uudestaan. Ehkäistään mahdollisuus laittaa sama tag monta kertaa.
+			$query = DB::connection()->prepare('SELECT * FROM reseptiaine WHERE reseptiid = :reseptiid AND aineid = :aineid');
+			$query->execute(array(
+				'reseptiid' => $this->id,
+				'aineid' => $aine->id
+			));
+			$row = $query->fetch();
+			if($row) {
+				continue;
+			}
+
+			$query = DB::connection()->prepare('INSERT INTO reseptiaine (reseptiid, aineid, maara) VALUES (:reseptiid, :aineid, :maara)');
+			$query->execute(array(
+				'reseptiid' => $this->id,
+				'aineid' => $aine->id,
+				'maara' => $aine->maara
 			));
 		}
     }

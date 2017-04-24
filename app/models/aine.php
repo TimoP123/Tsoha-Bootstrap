@@ -85,6 +85,20 @@ class Aine extends BaseModel {
 		
 		$this->id = $row['id'];
 	}
+
+
+	public function checkAndSave($name) {
+		// Tarkistetaan loytyyko aine jo valmiiksi tietokannasta.
+		$aine = self::findByName(strtolower($name));
+		if($aine) {
+			return $aine->id;
+		}
+
+		// Jos aine ei ole jo valmiiksi olemassa, luodaan talletetaan sellainen tietokantaan
+		$aine = new Aine(array('nimi' => $name));
+		$aine->save();
+		return $aine->id;
+	}
 	
 	
 	public function destroy() {
