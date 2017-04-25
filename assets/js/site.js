@@ -34,8 +34,6 @@ $(document).ready(function(){
 	});
 
 	$('#addAineField').click(function() {
-		//var html = '<table><tr><td><i>Aine</i></td><td><i>M&auml;&auml;r&auml;</i></td></tr>';
-		//html += '<tr><td><input type="text" class="form-control" name="aineet[]"></td><td><input type="text" class="form-control" name="maarat[]"></td></tr></table>';
 		$('#aineFields').append('<br><i>Aine</i><input type="text" class="form-control" name="aineet[]"><i>M&auml;&auml;r&auml;</i><input type="text" class="form-control" name="maarat[]">');
 	});
 
