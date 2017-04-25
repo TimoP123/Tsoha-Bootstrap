@@ -8,9 +8,11 @@
 		</div>
 	{% endif %}
 
-  {% if user_logged_in %}
-    <p>Olet kirjautunut sisään nimellä {{user_logged_in.nimi}}</p>
-  {% endif %}
+  {% if error %}
+		<div class="alert alert-danger">
+		  {{error}}
+		</div>
+	{% endif %}
 
   <div class="page-header">
     <h1>Tervetuloa Reseptitietokantaan!</h1>

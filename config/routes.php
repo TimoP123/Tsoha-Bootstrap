@@ -39,6 +39,10 @@
   $routes->get('/kayttaja', function() {
     UserController::index();
   });
+
+  $routes->post('/kayttaja', function() {
+    UserController::store();
+  });
   
   $routes->get('/kayttaja/new', function() {
     UserController::create();
@@ -74,6 +78,10 @@
   
   $routes->get('/kayttaja/:id', function($id){
 	  UserController::show($id);
+  });
+
+  $routes->get('/kayttaja/:id/edit', function($id){
+    UserController::edit($id);
   });
 
   $routes->get('/hiekkalaatikko', function() {

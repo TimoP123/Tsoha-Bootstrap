@@ -142,6 +142,8 @@ class Kayttaja extends BaseModel {
 		} else {
 			$errors[] = 'Email-osoite ei ole oikein!';
 		}
+		
+		return $errors;
 	}
 	
 	public function validate_salasanan_minimipituus() {

@@ -63,6 +63,10 @@
     </nav>
 
     <div id="main-container">
+      {% if user_logged_in %}
+          <p>Olet kirjautunut sisään nimellä <a href="{{base_path}}/kayttaja/{{user_logged_in.id}}">{{user_logged_in.nimi}}</a></p>
+      {% endif %}
+
       <!-- Dynaaminen sisältö tulee tähän -->
       {% block content %}{% endblock %}
     </div>
