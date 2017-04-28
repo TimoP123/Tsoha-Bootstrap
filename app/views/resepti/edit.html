@@ -19,12 +19,33 @@
     </div>
 
     <div class="form-group" id="aineFields">
+	<!--
       <label>Valmistusaineet</label>
       <ul>
         {% for aine in attributes.aineet %}
           <li>{{aine.nimi}}, {{aine.maara}}</li>
         {% endfor %}
       </ul>
+	 -->
+		<h3>Valmistusaineet</h3>
+	
+		<table class="table table-striped table-bordered">
+			<thead>
+			  <tr>
+				<th>Raaka-aine</th>
+				<th>määrä</th>
+			  </tr>
+			</thead>
+			
+			<tbody>
+			  {% for aine in attributes.aineet %}
+				<tr>
+				  <td>{{aine.nimi}}</td>
+				  <td>{{aine.maara}}</td>
+				</tr>
+			  {% endfor %}
+			</tbody>
+		</table>
     </div>
     
     <div class="add">

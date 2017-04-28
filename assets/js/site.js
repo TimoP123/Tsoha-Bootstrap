@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	
+	// Autocomplete-skriptit
 	$('#nimihaku').click(function() {
 		$.getJSON("http://tpudas.users.cs.helsinki.fi/reseptit/nimet", function(data) {
 			$('#hakusana').autocomplete({
@@ -29,12 +30,13 @@ $(document).ready(function(){
 		$('#nimihaku').click();
 	}
 
+	// Tag- ja raaka-ainekenttien lisääminen
 	$('#addTagField').click(function() {
-		$('#tagFields').append('<br><i>Tag</i><input type="text" class="form-control" name="tagit[]">');
+		$('#tagFields').append('<br><i>Tag</i><input type="text" class="form-control" title="Kirjoita kenttään yksi tagi. Lisää kenttiä saat alla olevasta nappulasta." name="tagit[]">');
 	});
 
 	$('#addAineField').click(function() {
-		$('#aineFields').append('<br><i>Aine</i><input type="text" class="form-control" name="aineet[]"><i>M&auml;&auml;r&auml;</i><input type="text" class="form-control" name="maarat[]">');
+		$('#aineFields').append('<br><i>Aine</i><input type="text" class="form-control" title="Kirjoita aine perusmuodossa (esim. kananmuna)." name="aineet[]"><i>M&auml;&auml;r&auml;</i><input type="text" class="form-control" title="Voit kirjoittaa raaka-ainemäärän missä muodossa haluat (esim. hyppysellinen, 3, 4dl, jne.)." name="maarat[]">');
 	});
 
 	// Poistamisen varmistaminen
@@ -46,3 +48,4 @@ $(document).ready(function(){
 	});
 	
 });
+

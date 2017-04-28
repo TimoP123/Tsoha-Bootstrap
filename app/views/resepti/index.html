@@ -41,13 +41,27 @@
 	<tbody>
 	  {% for resepti in reseptit %}
 		<tr>
+		
+			
+		
 		  <td><a href="{{base_path}}/resepti/{{resepti.id}}">{{resepti.nimi}}</td>
 		  <td><a href="{{base_path}}/kayttaja/{{resepti.tekijaId}}">{{resepti.tekija}}</a></td>
 			{% if user_logged_in %}
-				<td>{{forms.edit_button("#{base_path}/resepti/#{resepti.id}/edit")}}</td>
-				<td>{{forms.destroy_button("#{base_path}/resepti/#{resepti.id}/destroy", "Poista resepti")}}</td>
+				{% if user_logged_in.taso == 2 %}
+					<td>{{forms.edit_button("#{base_path}/resepti/#{resepti.id}/edit")}}</td>
+					<td>{{forms.destroy_button("#{base_path}/resepti/#{resepti.id}/destroy", "Poista resepti")}}</td>
+				{% elseif user_logged_in.id == resepti.tekijaId %}
+					<td>{{forms.edit_button("#{base_path}/resepti/#{resepti.id}/edit")}}</td>
+					<td>{{forms.destroy_button("#{base_path}/resepti/#{resepti.id}/destroy", "Poista resepti")}}</td>
+				{% else %}
+					<td></td>
+					<td></td>
+				{% endif %}
 			{% endif %}
 		</tr>
+		
+		
+		
 	  {% endfor %}
 	</tbody>
 	</table>

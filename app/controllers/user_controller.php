@@ -3,7 +3,11 @@
 class UserController extends BaseController {
 
 	public static function login(){
-		View::make('kayttaja/login.html');
+		if(self::get_user_logged_in()) {
+			Redirect::to('/', array('message' => 'Olet jo kirjautunut sisään!'));
+		} else {
+			View::make('kayttaja/login.html');
+		}
 	}
 
 	public static function handle_login(){

@@ -56,7 +56,7 @@ class ReseptiController extends BaseController {
 			if(strlen($tagnimi) == 0) {
 				continue;
 			}
-			$tagId = Tag::checkAndSave($tagnimi);
+			$tagId = Tag::checkAndSave(strtolower($tagnimi));
 			$tag = Tag::find($tagId);
 			$attributes['tagit'][] = $tag;
 			$errors = array_merge($errors, $tag->errors());
@@ -66,9 +66,9 @@ class ReseptiController extends BaseController {
 			if(strlen($aineet[$i]) == 0 || strlen($maarat[$i]) == 0) {
 				continue;
 			}
-			$aineId = Aine::checkAndSave($aineet[$i]);
+			$aineId = Aine::checkAndSave(strtolower($aineet[$i]));
 			$aine = Aine::find($aineId);
-			$aine->maara = $maarat[$i];
+			$aine->maara = strtolower($maarat[$i]);
 			$attributes['aineet'][] = $aine;
 			$errors = array_merge($errors, $aine->errors());
 		}
@@ -90,7 +90,11 @@ class ReseptiController extends BaseController {
 		
 		$resepti = Resepti::find($id);
 		
-		View::make('resepti/edit.html', array('attributes' => $resepti));
+		if(self::get_user_logged_in()->getId() == $resepti->tekijaId || self::is_admin()) {
+			View::make('resepti/edit.html', array('attributes' => $resepti));
+		} else {
+			Redirect::to('/resepti/' . $resepti->id, array('message' => 'Et voi muokata toisten reseptejä!'));
+		}
 	}
 
 
@@ -128,7 +132,7 @@ class ReseptiController extends BaseController {
 			if(strlen($tagnimi) == 0) {
 				continue;
 			}
-			$tagId = Tag::checkAndSave($tagnimi);
+			$tagId = Tag::checkAndSave(strtolower($tagnimi));
 			$tag = Tag::find($tagId);
 			$attributes['tagit'][] = $tag;
 			$errors = array_merge($errors, $tag->errors());
@@ -138,9 +142,9 @@ class ReseptiController extends BaseController {
 			if(strlen($aineet[$i]) == 0 || strlen($maarat[$i]) == 0) {
 				continue;
 			}
-			$aineId = Aine::checkAndSave($aineet[$i]);
+			$aineId = Aine::checkAndSave(strtolower($aineet[$i]));
 			$aine = Aine::find($aineId);
-			$aine->maara = $maarat[$i];
+			$aine->maara = strtolower($maarat[$i]);
 			$attributes['aineet'][] = $aine;
 			$errors = array_merge($errors, $aine->errors());
 		}
