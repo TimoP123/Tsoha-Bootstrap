@@ -23,6 +23,9 @@
 		<th>Nimi</th>
 		<th>Email</th>
 		<th>Taso</th>
+		{% if user_logged_in.taso == 2 %}
+				<th></th>
+		{% endif %}
 	  </tr>
 	</thead>
 
@@ -33,8 +36,14 @@
 		  <td>{{kayttaja.email}}</td>
 			{% if kayttaja.taso == 2 %}
 				<td>Admin</td>
+				{% if user_logged_in.taso == 2 %}
+					<td></td>
+				{% endif %}
 			{% else %}
 				<td>Peruskäyttäjä</td>
+				{% if user_logged_in.taso == 2 %}
+					<td>{{forms.destroy_user("#{base_path}/kayttaja/#{kayttaja.id}/destroy", "Poista käyttäjä")}}</td>
+				{% endif %}
 			{% endif %}
 		</tr>
 	  {% endfor %}

@@ -12,7 +12,7 @@ class UserController extends BaseController {
 
 	public static function handle_login(){
 		$params = $_POST;
-
+		
 		$kayttaja = Kayttaja::authenticate($params['email'], $params['salasana']);
 
 		if(!$kayttaja){
@@ -64,6 +64,10 @@ class UserController extends BaseController {
 			'salasana' => $params['salasana'],
 			'taso' => 1 // Lomakkeen avulla luodaan vain peruskäyttäjiä
 		);
+		
+		if(!strcmp($params['salasana'], $params['salasana2']) == 0) {
+			View::make('kayttaja/new.html', array('errors' => array('Salasanat ovat erilaiset.'), 'attributes' => $attributes));
+		}
 
 		$kayttaja = new Kayttaja($attributes);
 
@@ -80,19 +84,72 @@ class UserController extends BaseController {
 	public static function edit($id) {
 		self::check_logged_in();
 
+		$kayttaja = Kayttaja::find($id);
+
 		if((self::get_user_logged_in()->id == $id) || self::is_admin()) {
-			$kayttaja = Kayttaja::find($id);
-			View::make('kayttaja/edit.html', array('attributes' => $kayttaja));
+			View::make('kayttaja/edit.html', array('attributes' => $kayttaja));	
+		} else {
+			Redirect::to('/', array('error' => 'Voit muokata vain omia tietojasi!'));
+		}
+
+	}
+
+	public static function update($id) {
+		self::check_logged_in();
+
+		$params = $_POST;
+
+		$attributes = array(
+			'id' => $id,
+			'nimi' => $params['nimi'],
+			'email' => $params['email'],
+			'salasana' => $params['salasana'],
+		);
+		
+		if(!strcmp($params['salasana'], $params['salasana2']) == 0) {
+			View::make('kayttaja/edit.html', array('errors' => array('Salasanat ovat erilaiset.'), 'attributes' => $attributes));
+		}
+
+		if(self::is_admin()) {
+			$attributes['taso'] = 2;
+		} else {
+			$attributes['taso'] = 1;
+		}
+
+		$kayttaja = new Kayttaja($attributes);
+		$errors = $kayttaja->errors();
+
+		if($kayttaja->id == $id) {
+			if(count($errors) == 0) {
+				$kayttaja->update();
+				Redirect::to('/kayttaja/'.$kayttaja->id, array('message' => 'Tietojasi muokattiin onnistuneesti!'));
+			} else {
+				View::make('kayttaja/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+			}
 		} else {
 			Redirect::to('/', array('error' => 'Voit muokata vain omia tietojasi!'));
 		}
 	}
 
-	public static function update($id) {
-		self::check_logged_in();
-	}
-
 	public static function destroy($id) {
-		self::check_logged_in();
+		if(!(self::is_admin())) {
+			Redirect::to('/', array('error' => 'Kuulehan.. Et voi poistaa käyttäjiä!'));
+		}
+
+		$kayttaja = Kayttaja::find($id);
+		// Varmistetaan vielä, että poistettava käyttäjä on peruskäyttäjätasoinen.
+		if($kayttaja->taso == 1) {
+			
+			// Poistetaan poistettavan käyttäjän reseptit ensin.
+			$reseptit = Resepti::findByOwner($id);
+			foreach($reseptit as $resepti) {
+				$resepti->destroy();
+			}
+			
+			$kayttaja->destroy();
+			Redirect::to('/kayttaja', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
+		} else {
+			Redirect::to('/kayttaja', array('message' => 'Et voi poistaa admineja!'));
+		}
 	}
 }

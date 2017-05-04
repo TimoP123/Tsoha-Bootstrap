@@ -84,6 +84,14 @@
     UserController::edit($id);
   });
 
+  $routes->post('/kayttaja/:id/edit', function($id){
+    UserController::update($id);
+  });
+
+  $routes->post('/kayttaja/:id/destroy', function($id){
+    UserController::destroy($id);
+  });
+
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });

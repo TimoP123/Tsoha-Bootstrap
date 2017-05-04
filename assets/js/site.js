@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	// Autocomplete-skriptit
+	// Autocomplete-skriptit, jotka hoitavat hakukenttien sanaehdotuksia.
 	$('#nimihaku').click(function() {
 		$.getJSON("http://tpudas.users.cs.helsinki.fi/reseptit/nimet", function(data) {
 			$('#hakusana').autocomplete({
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		});
 	});
   
-	// Suoritetaan nimihakukentan klikkaus, jos ollaan hakusivulla.
+	// Suoritetaan nimihakukentan klikkaus oletukseksi, jos ollaan hakusivulla.
 	if($('#nimihaku').length) {
 		$('#nimihaku').click();
 	}
@@ -47,5 +47,20 @@ $(document).ready(function(){
 		}
 	});
 	
+	// Varmistetaan ennen lomakkeen lähettämistä, että salasana on riittävän pitkä ja että se on syötetty kaksi kertaa samalla tavalla.
+	$('form.user_form').on('submit', function(submit){
+		
+		if($('#salasana').val().length < 6) {
+			submit.preventDefault();
+			alert("Salasanan tulee olla vähintään kuusi merkkiä pitkä!");
+			return false;
+		}
+		
+		if(!($('#salasana').val() === $('#salasana2').val())) {
+			submit.preventDefault();
+			alert("Salasanat eivät ole samanlaiset!");
+			return false;
+		}		
+	});
 });
 

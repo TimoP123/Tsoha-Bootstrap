@@ -46,15 +46,15 @@
 			      <li><a href="{{base_path}}/resepti">Reseptit</a></li>
 				  <li><a href="{{base_path}}/resepti/search">Haku</a></li>
 				  {% if user_logged_in %}
-					<li><a href="{{base_path}}/kayttaja">Käyttäjät</a></li>
+					  <li><a href="{{base_path}}/kayttaja">Käyttäjät</a></li>
 				  {% endif %}
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             {% if user_logged_in %}
               <li><a href="{{base_path}}/logout"><button class="btn btn-default btn-sm">Kirjaudu ulos</button></a></li>
-              
             {% else %}
+              <li><a href="{{base_path}}/kayttaja/new">Rekisteröidy</a></li>
               <li><a href="{{base_path}}/login"><span class="glyphicon glyphicon-log-in"></span> Kirjaudu sisään</a></li>
             {% endif %}
           </ul>

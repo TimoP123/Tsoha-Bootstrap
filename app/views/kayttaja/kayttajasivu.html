@@ -38,6 +38,14 @@
 	</b></p>
 	
 	
-	<a href="http://tpudas.users.cs.helsinki.fi/reseptit/kayttaja" class="btn btn-primary">Käyttäjälistaukseen</a>	
+	<a href="http://tpudas.users.cs.helsinki.fi/reseptit/kayttaja" class="btn btn-primary">Käyttäjälistaukseen</a>
+	{% if user_logged_in.id == kayttaja.id %}
+		{{forms.edit_user("#{base_path}/kayttaja/#{kayttaja.id}/edit", "Muokkaa tietojasi")}}
+	{% endif %}
+	{% if user_logged_in.taso == 2 %}
+		{% if kayttaja.taso == 1 %}
+			{{forms.destroy_user("#{base_path}/kayttaja/#{kayttaja.id}/destroy", "Poista käyttäjä")}}
+		{% endif %}
+	{% endif %}
 	
 {% endblock %}

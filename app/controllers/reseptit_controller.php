@@ -52,6 +52,7 @@ class ReseptiController extends BaseController {
 
 		$errors = $resepti->errors();
 
+		// Käydään reseptiin mahdollisesti liitetyt tagit läpi ja lisätään ne tietokantaan, jos ne eivät ole jo siellä.
 		foreach($tagit as $tagnimi) {
 			if(strlen($tagnimi) == 0) {
 				continue;
@@ -62,6 +63,7 @@ class ReseptiController extends BaseController {
 			$errors = array_merge($errors, $tag->errors());
 		}
 
+		// Käydään myös reseptin valmistusaineet läpi ja lisätään tietokantaan ne aineet, jotka eivät siellä vielä ole.
 		for($i = 0; $i < sizeof($aineet); $i++) {
 			if(strlen($aineet[$i]) == 0 || strlen($maarat[$i]) == 0) {
 				continue;
@@ -90,6 +92,7 @@ class ReseptiController extends BaseController {
 		
 		$resepti = Resepti::find($id);
 		
+		// Varmistetaan, että reseptiä pääsee muokkaamaan vain reseptin luoja tai admin.
 		if(self::get_user_logged_in()->getId() == $resepti->tekijaId || self::is_admin()) {
 			View::make('resepti/edit.html', array('attributes' => $resepti));
 		} else {
@@ -163,16 +166,18 @@ class ReseptiController extends BaseController {
 
 	public static function destroy($id){
 		self::check_logged_in();
-		
-		// Tilapäinen koodi, poistetaan myöhemmin
-		if($id == 1) {
-			Redirect::to('/resepti', array('message' => 'Resepti, jonka yritit poistaa, on niin ainutlaatuinen, että annetaanpa sen olla.'));
-		}
 
 		$resepti = Resepti::find($id);
-		$resepti->destroy();
 
-		Redirect::to('/resepti', array('message' => 'Resepti on poistettu onnistuneesti!'));
+		// Varmistetaan, että reseptin pystyy poistamaan vain sen luoja tai admin.
+		if(self::get_user_logged_in()->id == $resepti->tekijaId || self::is_admin()) {
+			$resepti = Resepti::find($id);
+			$resepti->destroy();
+
+			Redirect::to('/resepti', array('message' => 'Resepti on poistettu onnistuneesti!'));
+		} else {
+			Redirect::to('/resepti/' . $resepti->id, array('message' => 'Et voi poistaa toisten reseptejä!'));
+		}
 	}
 	
 	
@@ -214,7 +219,7 @@ class ReseptiController extends BaseController {
 		}
 	}
 	
-	
+	// Funktio palauttaa reseptien nimet JSON-taulukkona hakusivun autocomplete-toimintoa varten.
 	public static function listJSON() {
 		$nimet = Resepti::nimiTaulukko();
 		header("content-type: application/json");

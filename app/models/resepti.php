@@ -47,7 +47,6 @@ class Resepti extends BaseModel {
 		return $tagit;
 	}
 	
-	
 	public static function all() {
 		$query = DB::connection()->prepare('SELECT * FROM resepti');
 		$query->execute();
@@ -62,6 +61,9 @@ class Resepti extends BaseModel {
 				'ohje' => $row['ohje']
 			));
 		}
+		
+		// Järjestetään reseptit aakkosjärjestykseen.
+		usort($reseptit, "sortByName");
 		
 		return $reseptit;
 	}
@@ -102,6 +104,8 @@ class Resepti extends BaseModel {
 			));
 		}
 		
+		usort($reseptit, "sortByName");
+		
 		return $reseptit;
 	}
 	
@@ -128,6 +132,8 @@ class Resepti extends BaseModel {
 			));
 		}
 		
+		usort($reseptit, "sortByName");
+		
 		return $reseptit;
 	}
 	
@@ -148,6 +154,27 @@ class Resepti extends BaseModel {
 		foreach($rows as $row) {
 			$reseptit[] = new Resepti(array(
 				'id' => $row['reseptiid'],
+				'tekijaId' => $row['tekijaid'],
+				'nimi' => $row['nimi'],
+				'ohje' => $row['ohje']
+			));
+		}
+		
+		usort($reseptit, "sortByName");
+		
+		return $reseptit;
+	}
+	
+	
+	public static function findByOwner($tekijaId) {
+		$query = DB::connection()->prepare('SELECT * FROM resepti WHERE tekijaid = :tekijaid');
+		$query->execute(array('tekijaid' => $tekijaId));
+		$rows = $query->fetchAll();
+		$reseptit = array();
+		
+		foreach($rows as $row) {
+			$reseptit[] = new Resepti(array(
+				'id' => $row['id'],
 				'tekijaId' => $row['tekijaid'],
 				'nimi' => $row['nimi'],
 				'ohje' => $row['ohje']
@@ -302,5 +329,7 @@ class Resepti extends BaseModel {
 		return parent::validate_string_length($this->ohje, self::OHJEEN_MINIMIPITUUS, 'Ohje');
 	}
 	
+	
 }
+
 	

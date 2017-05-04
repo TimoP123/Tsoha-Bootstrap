@@ -28,6 +28,7 @@
     }
 
 
+	// Validaattorifunktio, joka tarkistaa että merkkijono on vähintään halutun mittainen.
     public function validate_string_length($string, $length, $type){
       $errors = array();
       if($string == '' || $string == null){
@@ -40,7 +41,7 @@
       return $errors;
     }
 	
-	
+	// Validaattorifunktio, joka tarkistaa ettei merkkijono ylitä annettua maksimipituutta.
 	public function validate_string_max_length($string, $max_length, $type) {
 		$errors = array();
 		if(strlen($string) > $max_length){
@@ -51,3 +52,8 @@
 	}
 	
   }
+  
+// usort-funktion käyttämä callback-funktio reseptien järjestämiseksi.
+function sortByName($a, $b) {
+	return strcmp(strtolower($a->nimi), strtolower($b->nimi));
+}

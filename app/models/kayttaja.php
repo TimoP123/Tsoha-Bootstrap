@@ -31,6 +31,9 @@ class Kayttaja extends BaseModel {
 			));
 		}
 		
+		// Järjestetään käyttäjät aakkosjärjestykseen.
+		usort($kayttajat, "sortByName");
+		
 		return $kayttajat;
 	}
 	
