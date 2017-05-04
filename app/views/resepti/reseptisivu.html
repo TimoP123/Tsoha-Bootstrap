@@ -53,7 +53,7 @@
 	
 	<p>{{resepti.ohje}}</p>
 
-	<a href="http://tpudas.users.cs.helsinki.fi/reseptit/resepti" class="btn btn-primary">Selaa reseptejä</a>
+	<a href="{{base_path}}/resepti" class="btn btn-primary">Selaa reseptejä</a>
 	{% if user_logged_in.taso == 2 %}
 		{{forms.edit_button("#{base_path}/resepti/#{resepti.id}/edit", "Muokkaa reseptiä")}}
 		{{forms.destroy_button("#{base_path}/resepti/#{resepti.id}/destroy", "Poista resepti")}}

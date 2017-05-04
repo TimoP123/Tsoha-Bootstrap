@@ -19,14 +19,7 @@
     </div>
 
     <div class="form-group" id="aineFields">
-	<!--
-      <label>Valmistusaineet</label>
-      <ul>
-        {% for aine in attributes.aineet %}
-          <li>{{aine.nimi}}, {{aine.maara}}</li>
-        {% endfor %}
-      </ul>
-	 -->
+
 		<h3>Valmistusaineet</h3>
 	
 		<table class="table table-striped table-bordered">
@@ -74,7 +67,7 @@
 
     <div class="form-group">
       <button type="submit" class="btn btn-default">Tallenna muutokset</button>
-      <a href="http://tpudas.users.cs.helsinki.fi/reseptit/resepti" class="btn btn-primary">Palaa reseptilistaukseen</a>
+      <a href="{{base_path}}/resepti" class="btn btn-primary">Palaa reseptilistaukseen</a>
     </div>
   </form>
   
